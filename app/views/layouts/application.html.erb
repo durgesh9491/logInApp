@@ -12,10 +12,13 @@
     <%= render 'layouts/header' %>
       <div class="container">
       <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <div id="flash-message" class="alert alert-<%= message_type %>"><%= message %></div>
       <% end %>
       <%= yield %>
       <%= render 'layouts/footer' %>
     </div>
+    <%= javascript_tag do %>
+      jQuery("#flash-message").hide(4000);
+    <% end %>
   </body>
 </html>

@@ -8,7 +8,9 @@
       </h1>
     </section>
     <section class="micropost_form">
-      <%= render 'shared/micropost_form' %>
+      <%if @user.name == current_user.name %>
+        <%= render 'shared/micropost_form' %>
+      <%end%>
     </section>
   </aside>
   <div class="col-md-8">
