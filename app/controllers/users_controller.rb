@@ -8,6 +8,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
     @micropost = current_user.microposts.build
+    @post_comments_hash = {}
+    @microposts.each do |micropost|
+      @post_comments_hash[micropost.id] = micropost.comments;
+    end
   end
 
   def new
