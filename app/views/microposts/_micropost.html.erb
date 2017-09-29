@@ -12,6 +12,6 @@
     <%= render 'microposts/comment', comments: @post_comments_hash[micropost.id] %>
   </span>
   <span>
-    <%= render 'microposts/comment_form' %>
+    <%= render 'microposts/comment_form', comment: micropost.comments.build %>
   </span>
 </li>

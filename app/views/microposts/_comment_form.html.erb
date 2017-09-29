@@ -1,6 +1,15 @@
-<%= form_for(@micropost.comments.new) do |f| %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Compose new comment..." %>
+<%= form_for comment, url: comments_path(comment.micropost.id) do |f| %>
+  <div class="container">
+  <div class="dialogbox">
+    <div class="body">
+      <span class="tip tip-up"></span>
+      <div class="message">
+        <span>
+           <%= f.hidden_field :micropost_id %>
+           <%= f.text_area :content, placeholder: "Compose new comment..." %>
+           <%= f.button "Post", class: "btn btn-primary" %>
+        </span>
+      </div>
+    </div>
   </div>
-  <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>

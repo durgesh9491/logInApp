@@ -4,7 +4,10 @@ class StaticPagesController < ApplicationController
   def home
     @micropost = current_user.microposts.build
     @feed_items = current_user.feed.paginate(page: params[:page])
-     # start from here
+    @post_comments_hash = {}
+    @feed_items.each do |micropost|
+      @post_comments_hash[micropost.id] = micropost.comments;
+    end
   end
 
   def help
