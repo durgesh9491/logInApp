@@ -1,4 +1,4 @@
-<%= form_for comment, url: comments_path(comment.micropost.id) do |f| %>
+<%= form_for comment, url: comments_path(comment.micropost.id), html: { class: "new_comment_form" } do |f| %>
   <div class="container">
   <div class="dialogbox">
     <div class="body">
@@ -13,3 +13,19 @@
     </div>
   </div>
 <% end %>
+
+<%= javascript_tag do%>
+  $(".new_comment_form").submit(function(){
+    event.preventDefault();
+    var action = $(this).attr('action');
+    var method = $(this).attr('method');
+    var data = $(this).find('#comment_content').val();
+    var id = $(this).find('#comment_micropost_id').val();
+    $.ajax({
+      method: method
+      url: action
+      data: data
+    });
+    debugger;
+  });
+<%end%>
