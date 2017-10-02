@@ -5,7 +5,8 @@
       <span class="tip tip-up"></span>
       <div class="message">
         <span>
-           <%= f.hidden_field :comment_id %>
+            <%= f.hidden_field :comment_id %>
+            <%= f.hidden_field :creator_id %>
            <%= f.text_area :content, placeholder: "Compose new reply..." %>
            <%= f.submit "Post", class: "btn btn-primary" %>
         </span>

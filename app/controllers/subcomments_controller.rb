@@ -1,6 +1,7 @@
 class SubcommentsController < ApplicationController
   def create
     @subcomment = Subcomment.new(subcomment_params)
+    @subcomment.creator_id = current_user.id
     if @subcomment.save
       flash[:success] = 'successfully Replied.'
     else
@@ -18,7 +19,7 @@ class SubcommentsController < ApplicationController
 
   private
     def subcomment_params
-      params.require(:subcomment).permit(:content,:comment_id)
+      params.require(:subcomment).permit(:content, :comment_id, :creator_id)
     end
 end
 
