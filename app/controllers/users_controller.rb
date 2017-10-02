@@ -7,10 +7,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
-    @micropost = current_user.microposts.build
     @post_comments_hash = {}
+    @comment_subcomments_hash = {}
     @microposts.each do |micropost|
       @post_comments_hash[micropost.id] = micropost.comments;
+      micropost.comments.each do |comment|
+        @comment_subcomments_hash[comment.id] = comment.subcomments;
+      end
     end
   end
 

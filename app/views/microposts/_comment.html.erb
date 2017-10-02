@@ -7,5 +7,11 @@
       <%= link_to "delete", comment, method: :delete, data: { confirm: "You sure?" } %>
       <% end %>
     </span>
+  <span>
+    <%= render 'microposts/subcomment', subcomments: @comment_subcomments_hash[comment.id] %>
+  </span>
+  <span>
+    <%= render 'microposts/subcomment_form', subcomment: comment.subcomments.build %>
+  </span>
   </li>
 <% end %>

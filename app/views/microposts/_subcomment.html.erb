@@ -1,0 +1,11 @@
+<% subcomments.each do |subcomment| %>
+  <li id="subcomment-<%= subcomment.id %>">
+    <span class="content"><%= subcomment.content %></span>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(subcomment.created_at) %> ago.
+      <% if current_user?(subcomment.comment.micropost.user) %>
+      <%= link_to "delete", subcomment, method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </span>
+  </li>
+<% end %>
