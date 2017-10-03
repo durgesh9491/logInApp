@@ -1,6 +1,6 @@
 <% subcomments.each do |subcomment| %>
 <li>
-<div class="comment-avatar"><%= link_to gravatar_for(User.find(subcomment.creator_id), size: 30), User.find(subcomment.creator_id)%></div>
+<div class="comment-avatar"><%= link_to gravatar_for(User.find(subcomment.creator_id)), User.find(subcomment.creator_id)%></div>
 <div class="comment-box">
   <div class="comment-head">
     <h6 class="comment-name"><%= link_to User.find(subcomment.creator_id).name, User.find(subcomment.creator_id) %></h6>
@@ -14,6 +14,15 @@
   </div>
   <div class="comment-content">
     <%= subcomment.content %>
+    <span>
+      <%= link_to like_subcomment_path(subcomment), method: :put do %>
+      <i class="fa fa-thumbs-o-up"></i> <%= subcomment.get_upvotes.size %>
+      <% end %>
+
+      <%= link_to dislike_subcomment_path(subcomment), method: :put do %>
+      <i class="fa fa-thumbs-o-down"></i> <%= subcomment.get_downvotes.size %>
+      <% end %>
+    </span>
   </div>
 </div>
 </li>

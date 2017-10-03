@@ -2,6 +2,15 @@
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content"><%= micropost.content %></span>
+  <span>
+    <%= link_to like_micropost_path(micropost), method: :put do %>
+    <i class="fa fa-thumbs-o-up"></i> <%= micropost.get_upvotes.size %>
+    <% end %>
+
+    <%= link_to dislike_micropost_path(micropost), method: :put do %>
+    <i class="fa fa-thumbs-o-down"></i> <%= micropost.get_downvotes.size %>
+    <% end %>
+  </span>
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <% if current_user?(micropost.user) %>

@@ -17,6 +17,18 @@ class SubcommentsController < ApplicationController
  end
 
 
+def upvote
+  @Subcomment = Subcomment.find(params[:id])
+  @Subcomment.upvote_by current_user
+  redirect_to :back
+end
+
+def downvote
+  @Subcomment = Subcomment.find(params[:id])
+  @Subcomment.downvote_by current_user
+  redirect_to :back
+end
+
   private
     def subcomment_params
       params.require(:subcomment).permit(:content, :comment_id, :creator_id)

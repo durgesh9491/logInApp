@@ -6,4 +6,5 @@ class Comment < ActiveRecord::Base
   has_many :subcomments, :dependent => :destroy
   belongs_to :user, :foreign_key => "user_id"
   validates :creator_id, presence: true
+  acts_as_votable
 end

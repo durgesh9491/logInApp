@@ -16,12 +16,21 @@ Rails.application.routes.draw do
   end
   resources :microposts, only: [:create, :destroy] do
     member do
+      put "like", to: "microposts#upvote"
+      put "dislike", to: "microposts#downvote"
       resources :comments, only: [:create, :destroy] do
         member do
-          resources :subcomments, only: [:create, :destroy]
+          put "like", to: "comments#upvote"
+          put "dislike", to: "comments#downvote"
+          resources :subcomments, only: [:create, :destroy] do
+            member do
+            put "like", to: "subcomments#upvote"
+            put "dislike", to: "subcomments#downvote"
+          end
         end
       end
     end
   end
+end
   resources :relationships,       only: [:create, :destroy]
 end

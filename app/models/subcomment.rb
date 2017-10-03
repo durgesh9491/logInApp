@@ -5,4 +5,5 @@ class Subcomment < ActiveRecord::Base
   default_scope -> { order(created_at: :asc) }
   belongs_to :user, :foreign_key => "user_id"
   validates :creator_id, presence: true
+  acts_as_votable
 end

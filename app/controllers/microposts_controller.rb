@@ -25,6 +25,19 @@ class MicropostsController < ApplicationController
     redirect_to root_url if @micropost.nil?
   end
 
+  def upvote
+    @Micropost = Micropost.find(params[:id])
+    @Micropost.upvote_by current_user
+    redirect_to :back
+  end
+
+  def downvote
+    @Micropost = Micropost.find(params[:id])
+    @Micropost.downvote_by current_user
+    redirect_to :back
+  end
+
+
   private
     def micropost_params
       params.require(:micropost).permit(:content, :user_id)

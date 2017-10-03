@@ -12,11 +12,18 @@
                 <%= link_to "delete", comment, method: :delete, data: { confirm: "You sure?" } %>
                 <% end %>
               </span>
-              <i class="fa fa-reply"></i>
-              <i class="fa fa-heart"></i>
             </div>
             <div class="comment-content">
              <%= comment.content %>
+              <div>
+                <%= link_to like_comment_path(comment), method: :put do %>
+                <i class="fa fa-thumbs-o-up"></i> <%= comment.get_upvotes.size %>
+                <% end %>
+
+                <%= link_to dislike_comment_path(comment), method: :put do %>
+                <i class="fa fa-thumbs-o-down"></i> <%= comment.get_downvotes.size %>
+                <% end %>
+              </span>
             </div>
           </div>
         </div>
