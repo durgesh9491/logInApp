@@ -10,13 +10,14 @@ gem 'jbuilder',     '2.2.3'
 gem 'sdoc',         '0.4.0', group: :doc
 gem 'activesupport'
 gem 'bcrypt',               '3.1.7'
+gem 'acts_as_votable', '~> 0.10.0'
+
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',     '~> 9.0'
   gem 'web-console', '2.0.0.beta3'
   gem 'spring',      '1.1.3'
-  # gem 'pry-rails', '~> 0.3.4'
 end
 
 group :test do

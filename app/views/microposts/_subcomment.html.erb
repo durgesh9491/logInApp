@@ -1,12 +1,20 @@
 <% subcomments.each do |subcomment| %>
-  <li id="subcomment-<%= subcomment.id %>">
-    <span class="user"><%= link_to User.find(subcomment.creator_id).name, User.find(subcomment.creator_id) %></span>
-    <span class="content"><%= subcomment.content %></span>
-    <span class="timestamp">
+<li>
+<div class="comment-avatar"><%= link_to gravatar_for(User.find(subcomment.creator_id), size: 30), User.find(subcomment.creator_id)%></div>
+<div class="comment-box">
+  <div class="comment-head">
+    <h6 class="comment-name"><%= link_to User.find(subcomment.creator_id).name, User.find(subcomment.creator_id) %></h6>
+    <span>
       Posted <%= time_ago_in_words(subcomment.created_at) %> ago.
       <% if current_user? User.find(subcomment.creator_id) or current_user?subcomment.comment.micropost.user%>
       <%= link_to "delete", subcomment, method: :delete, data: { confirm: "Are you sure?" } %>
       <% end %>
     </span>
-  </li>
+    <i class="fa fa-heart"></i>
+  </div>
+  <div class="comment-content">
+    <%= subcomment.content %>
+  </div>
+</div>
+</li>
 <% end %>

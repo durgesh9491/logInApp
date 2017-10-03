@@ -1,18 +1,30 @@
 <% comments.each do |comment| %>
-  <li id="comment-<%= comment.id %>">
-  <%= link_to link_to User.find(comment.creator_id).name, User.find(comment.creator_id) %>
-    <span class="content"><%= comment.content %></span>
-    <span class="timestamp">
-      Posted <%= time_ago_in_words(comment.created_at) %> ago.
-      <% if current_user? User.find(comment.creator_id) or current_user? comment.micropost.user%>
-      <%= link_to "delete", comment, method: :delete, data: { confirm: "You sure?" } %>
-      <% end %>
-    </span>
-  <span>
-    <%= render 'microposts/subcomment', subcomments: @comment_subcomments_hash[comment.id] %>
-  </span>
-  <span>
-    <%= render 'microposts/subcomment_form', subcomment: comment.subcomments.build %>
-  </span>
-  </li>
+ <div class="comment-row row">
+    <ul id="comments-list" class="comments-list">
+      <li>
+        <div class="comment-main-level">
+          <div class="comment-box">
+            <div class="comment-head">
+              <h6 class="comment-name by-author"><%= link_to User.find(comment.creator_id).name, User.find(comment.creator_id) %></h6>
+              <span>
+                Posted <%= time_ago_in_words(comment.created_at) %> ago.
+                <% if current_user? User.find(comment.creator_id) or current_user? comment.micropost.user%>
+                <%= link_to "delete", comment, method: :delete, data: { confirm: "You sure?" } %>
+                <% end %>
+              </span>
+              <i class="fa fa-reply"></i>
+              <i class="fa fa-heart"></i>
+            </div>
+            <div class="comment-content">
+             <%= comment.content %>
+            </div>
+          </div>
+        </div>
+        <ul class="comments-list reply-list">
+            <%= render 'microposts/subcomment', subcomments: @comment_subcomments_hash[comment.id] %>
+            <%= render 'microposts/subcomment_form', subcomment: comment.subcomments.build %>
+        </ul>
+      </li>
+    </ul>
+  </div>
 <% end %>
