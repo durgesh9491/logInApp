@@ -3,4 +3,8 @@
     <%= render @feed_items %>
   </ol>
   <%= will_paginate @feed_items %>
+<%else%>
+<div>
+   No Microposts, click <%= link_to "here", users_path %> to follow Users !
+</div>
 <% end %>

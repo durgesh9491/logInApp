@@ -17,8 +17,10 @@
     <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
     <% end %>
   </span>
-  <div class="comment_section">
-    <%= render 'microposts/comment', comments: @post_comments_hash[micropost.id] %>
+  <div class="comment_section comment-for-micropost-<%= micropost.id %>">
+    <div class="comments_container">
+      <%= render 'microposts/comments', comments: @post_comments_hash[micropost.id] %>
+    </div>
     <%= render 'microposts/comment_form', comment: micropost.comments.build %>
   </div>
 </li>

@@ -14,23 +14,23 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :microposts, only: [:create, :destroy] do
+  resources :microposts, only: [:create, :destroy], shallow: true do
     member do
       put "like", to: "microposts#upvote"
       put "dislike", to: "microposts#downvote"
-      resources :comments, only: [:create, :destroy] do
+    end
+    resources :comments, only: [:create, :destroy], shallow: true do
+      member do
+        put "like", to: "comments#upvote"
+        put "dislike", to: "comments#downvote"
+      end
+      resources :subcomments, only: [:create, :destroy] do
         member do
-          put "like", to: "comments#upvote"
-          put "dislike", to: "comments#downvote"
-          resources :subcomments, only: [:create, :destroy] do
-            member do
-            put "like", to: "subcomments#upvote"
-            put "dislike", to: "subcomments#downvote"
-          end
+          put "like", to: "subcomments#upvote"
+          put "dislike", to: "subcomments#downvote"
         end
       end
     end
   end
-end
   resources :relationships,       only: [:create, :destroy]
 end

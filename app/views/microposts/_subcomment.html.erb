@@ -1,4 +1,3 @@
-<% subcomments.each do |subcomment| %>
 <li>
 <div class="comment-avatar"><%= link_to gravatar_for(User.find(subcomment.creator_id)), User.find(subcomment.creator_id)%></div>
 <div class="comment-box">
@@ -25,4 +24,3 @@
   </div>
 </div>
 </li>
-<% end %>

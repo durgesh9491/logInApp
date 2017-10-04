@@ -3,11 +3,16 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.creator_id = current_user.id
     if @comment.save
-      flash[:success] = 'Comment was successfully created.'
+      respond_to do |format|
+        format.html do
+          redirect_to :back
+        end
+        format.js do
+        end
+      end
     else
-      flash[:notice] = "Error creating comment !"
+      flash[:notice] = "Error creating comment!"
     end
-    redirect_to :back
   end
 
  def destroy
@@ -30,6 +35,6 @@ class CommentsController < ApplicationController
 
   private
     def comment_params
-      params.require(:comment).permit(:content, :micropost_id, :creator_id)
+      params.require(:comment).permit(:content, :micropost_id)
     end
 end

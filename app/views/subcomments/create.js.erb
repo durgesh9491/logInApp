@@ -1,0 +1,2 @@
+jQuery(".reply-for-comment-<%= @subcomment.comment.id %>").find(".subcomments_container").append('<%= escape_javascript(render partial: 'microposts/subcomment', locals: { subcomment: @subcomment }) %>');
+jQuery(".reply-for-comment-<%= @subcomment.comment.id %>").find("#subcomment_content").val("");

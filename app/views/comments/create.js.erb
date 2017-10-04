@@ -1,0 +1,2 @@
+jQuery(".comment-for-micropost-<%= @comment.micropost.id %>").find(".comments_container").append('<%= escape_javascript(render partial: 'microposts/comment', locals: {comment: @comment}) %>');
+jQuery(".comment-for-micropost-<%= @comment.micropost.id %>").find("#comment_content").val("");

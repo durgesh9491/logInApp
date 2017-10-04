@@ -1,37 +1,37 @@
-<% comments.each do |comment| %>
- <div class="comment-row row">
+  <div class="comment-row row">
     <ul id="comments-list" class="comments-list">
-      <li>
-        <div class="comment-main-level">
-          <div class="comment-box">
-            <div class="comment-head">
-              <h6 class="comment-name by-author"><%= link_to User.find(comment.creator_id).name, User.find(comment.creator_id) %></h6>
-              <span>
-                Posted <%= time_ago_in_words(comment.created_at) %> ago.
-                <% if current_user? User.find(comment.creator_id) or current_user? comment.micropost.user%>
-                <%= link_to "delete", comment, method: :delete, data: { confirm: "You sure?" } %>
-                <% end %>
-              </span>
-            </div>
-            <div class="comment-content">
-             <%= comment.content %>
-              <div>
-                <%= link_to like_comment_path(comment), method: :put do %>
-                <i class="fa fa-thumbs-o-up"></i> <%= comment.get_upvotes.size %>
-                <% end %>
-
-                <%= link_to dislike_comment_path(comment), method: :put do %>
-                <i class="fa fa-thumbs-o-down"></i> <%= comment.get_downvotes.size %>
-                <% end %>
-              </span>
-            </div>
-          </div>
+   <li>
+    <div class="comment-main-level">
+      <div class="comment-box">
+        <div class="comment-head">
+          <h6 class="comment-name by-author"><%= link_to User.find(comment.creator_id).name, User.find(comment.creator_id) %></h6>
+          <span>
+            Posted <%= time_ago_in_words(comment.created_at) %> ago.
+            <% if current_user? User.find(comment.creator_id) or current_user? comment.micropost.user%>
+            <%= link_to "delete", comment, method: :delete, data: { confirm: "You sure?" } %>
+            <% end %>
+          </span>
         </div>
-        <ul class="comments-list reply-list">
-            <%= render 'microposts/subcomment', subcomments: @comment_subcomments_hash[comment.id] %>
-            <%= render 'microposts/subcomment_form', subcomment: comment.subcomments.build %>
-        </ul>
-      </li>
+        <div class="comment-content">
+         <%= comment.content %>
+          <div>
+            <%= link_to like_comment_path(comment), method: :put do %>
+            <i class="fa fa-thumbs-o-up"></i> <%= comment.get_upvotes.size %>
+            <% end %>
+
+            <%= link_to dislike_comment_path(comment), method: :put do %>
+            <i class="fa fa-thumbs-o-down"></i> <%= comment.get_downvotes.size %>
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <ul class="comments-list reply-list reply-for-comment-<%= comment.id %>">
+        <div class="subcomments_container">
+          <%= render 'microposts/subcomments', subcomments: comment.subcomments %>
+        </div>
+        <%= render 'microposts/subcomment_form', subcomment: comment.subcomments.build %>
     </ul>
-  </div>
-<% end %>
+  </li>
+</ul>
+</div>

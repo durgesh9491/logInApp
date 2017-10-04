@@ -3,11 +3,18 @@ class SubcommentsController < ApplicationController
     @subcomment = Subcomment.new(subcomment_params)
     @subcomment.creator_id = current_user.id
     if @subcomment.save
-      flash[:success] = 'successfully Replied.'
+      flash[:notice] = "Error creating reply !"
+      respond_to do |format|
+        format.html do
+          redirect_to :back
+        end
+
+        format.js do
+        end
+      end
     else
       flash[:notice] = "Error creating reply !"
     end
-    redirect_to :back
   end
 
  def destroy
@@ -31,7 +38,7 @@ end
 
   private
     def subcomment_params
-      params.require(:subcomment).permit(:content, :comment_id, :creator_id)
+      params.require(:subcomment).permit(:content, :comment_id)
     end
 end
 
