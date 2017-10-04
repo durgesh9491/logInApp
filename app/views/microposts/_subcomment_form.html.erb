@@ -6,6 +6,7 @@
       <div class="message">
         <span>
             <%= f.hidden_field :comment_id %>
+            <%= f.hidden_field :creator_id %>
            <%= f.text_area :content, placeholder: "Compose new reply..." %>
            <%= f.submit "Reply", class: "btn btn-reply btn-primary"%>
         </span>

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :comments, source: :creator_id
   has_many :subcomments, source: :creator_id
+  acts_as_voter
 
   before_save { self.email = email.downcase }
   validates :name, presence: true, length: { maximum: 50 }

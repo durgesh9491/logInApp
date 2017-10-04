@@ -33,13 +33,21 @@ class MicropostsController < ApplicationController
 
   def upvote
     @Micropost = Micropost.find(params[:id])
-    @Micropost.upvote_by current_user
+    if current_user.voted_up_on? @Micropost
+      @Micropost.unliked_by current_user
+    else
+      @Micropost.upvote_by current_user
+    end
     redirect_to :back
   end
 
   def downvote
     @Micropost = Micropost.find(params[:id])
-    @Micropost.downvote_by current_user
+    if current_user.voted_down_on? @Micropost
+      @Micropost.undisliked_by current_user
+    else
+      @Micropost.downvote_by current_user
+    end
     redirect_to :back
   end
 

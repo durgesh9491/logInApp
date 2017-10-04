@@ -26,13 +26,21 @@ class SubcommentsController < ApplicationController
 
 def upvote
   @Subcomment = Subcomment.find(params[:id])
-  @Subcomment.upvote_by current_user
+    if current_user.voted_up_on? @Subcomment
+      @Subcomment.unliked_by current_user
+    else
+     @Subcomment.upvote_by current_user
+    end
   redirect_to :back
 end
 
 def downvote
   @Subcomment = Subcomment.find(params[:id])
-  @Subcomment.downvote_by current_user
+  if current_user.voted_down_on? @Subcomment
+    @Subcomment.undisliked_by current_user
+  else
+    @Subcomment.downvote_by current_user
+  end
   redirect_to :back
 end
 

@@ -1,10 +1,10 @@
-  <div class="comment-row row">
+<div class="comment-row row">
     <ul id="comments-list" class="comments-list">
    <li>
     <div class="comment-main-level">
       <div class="comment-box">
         <div class="comment-head">
-          <h6 class="comment-name by-author"><%= link_to User.find(comment.creator_id).name, User.find(comment.creator_id) %></h6>
+          <h6 class="comment-name by-author" ><%= link_to User.find(comment.creator_id).name, User.find(comment.creator_id) %></h6>
           <span>
             Posted <%= time_ago_in_words(comment.created_at) %> ago.
             <% if current_user? User.find(comment.creator_id) or current_user? comment.micropost.user%>
@@ -16,11 +16,11 @@
          <%= comment.content %>
           <div>
             <%= link_to like_comment_path(comment), method: :put do %>
-            <i class="fa fa-thumbs-o-up"></i> <%= comment.get_upvotes.size %>
+            <i class="fa <%= current_user.voted_up_on?(comment) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' %>"></i> <%= comment.get_upvotes.size %>
             <% end %>
 
             <%= link_to dislike_comment_path(comment), method: :put do %>
-            <i class="fa fa-thumbs-o-down"></i> <%= comment.get_downvotes.size %>
+            <i class="fa <%= current_user.voted_down_on?(comment) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' %>"></i>  <%= comment.get_downvotes.size %>
             <% end %>
           </span>
         </div>

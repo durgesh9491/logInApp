@@ -3,12 +3,13 @@
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content"><%= micropost.content %></span>
   <span>
+
     <%= link_to like_micropost_path(micropost), method: :put do %>
-    <i class="fa fa-thumbs-o-up"></i> <%= micropost.get_upvotes.size %>
+    <i class="fa <%= current_user.voted_up_on?(micropost) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' %>"></i> <%= micropost.get_upvotes.size %>
     <% end %>
 
     <%= link_to dislike_micropost_path(micropost), method: :put do %>
-    <i class="fa fa-thumbs-o-down"></i> <%= micropost.get_downvotes.size %>
+    <i class="fa <%= current_user.voted_down_on?(micropost) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' %>"></i> <%= micropost.get_downvotes.size %>
     <% end %>
   </span>
   <span class="timestamp">

@@ -14,11 +14,11 @@
     <%= subcomment.content %>
     <span>
       <%= link_to like_subcomment_path(subcomment), method: :put do %>
-      <i class="fa fa-thumbs-o-up"></i> <%= subcomment.get_upvotes.size %>
+      <i class="fa <%= current_user.voted_up_on?(subcomment) ? 'fa-thumbs-up' : 'fa-thumbs-o-up' %>"></i> <%= subcomment.get_upvotes.size %>
       <% end %>
 
       <%= link_to dislike_subcomment_path(subcomment), method: :put do %>
-      <i class="fa fa-thumbs-o-down"></i> <%= subcomment.get_downvotes.size %>
+      <i class="fa <%= current_user.voted_down_on?(subcomment) ? 'fa-thumbs-down' : 'fa-thumbs-o-down' %>"></i> <%= subcomment.get_downvotes.size %>
       <% end %>
     </span>
   </div>
