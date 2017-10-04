@@ -11,6 +11,11 @@ gem 'sdoc',         '0.4.0', group: :doc
 gem 'activesupport'
 gem 'bcrypt',               '3.1.7'
 gem 'acts_as_votable', '~> 0.10.0'
+gem 'bootstrap-sass',       '3.2.0.0'
+gem 'rb-readline'
+gem 'faker',                '1.4.2'
+gem 'will_paginate',           '3.0.7'
+gem 'bootstrap-will_paginate', '0.0.10'
 
 
 group :development, :test do
@@ -26,8 +31,7 @@ group :test do
   gem 'guard-minitest',     '2.3.1'
 end
 
-gem 'bootstrap-sass',       '3.2.0.0'
-gem 'rb-readline'
-gem 'faker',                '1.4.2'
-gem 'will_paginate',           '3.0.7'
-gem 'bootstrap-will_paginate', '0.0.10'
+group :production do
+  gem 'pg',             '0.17.1'
+  gem 'rails_12factor', '0.0.2'
+end
